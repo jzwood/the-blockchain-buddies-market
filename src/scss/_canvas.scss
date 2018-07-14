@@ -1,0 +1,13 @@
+canvas {
+  position: absolute;
+}
+
+.game-wrapper {
+  width: 100vw;
+  min-width: 256px;
+  height: 50vh;
+  position: relative;
+  overflow: hidden;
+  background-color: #bcc7ff;
+}
+

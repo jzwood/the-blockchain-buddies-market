@@ -1,0 +1,19 @@
+.alder {
+  position: absolute;
+  bottom: 10px;
+}
+
+.tree {
+  transform-origin: bottom;
+  transform: rotateX(0Deg);
+  transition: transform 1s ease-in;
+}
+
+.fall {
+  transform: rotateX(90Deg);
+}
+
+.aqueducts {
+  position: absolute;
+  bottom: 20px;
+}

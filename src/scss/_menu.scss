@@ -1,0 +1,53 @@
+.menu-wrapper {
+  width: 100vw;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  overflow: scroll;
+
+  .menu {
+    display: flex;
+    background-color: #f9f9f9;
+    padding: 10px 0;
+  }
+
+  .image-box {
+    overflow: hidden;
+    width: 128px;
+    height: 128px;
+    text-align: center;
+    font-size: 76pt;
+    line-height: 154px;
+    transform: scale(0.85);
+    transition: transform 0.2s ease-out;
+
+    &:hover {
+      transform: scale(1);
+      cursor: pointer;
+    }
+  }
+
+
+  .copy {
+    font-size: 14px;
+    font-family: Lucida Console, Lucida Sans Typewriter, monaco, Bitstream Vera Sans Mono, monospace;
+    text-align: center;
+
+    .pricetag {
+
+    }
+
+    .name {
+
+    }
+  }
+
+
+  img {
+    width: 256px;
+    height: 256px;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+
+  }
+}

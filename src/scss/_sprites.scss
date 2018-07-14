@@ -1,0 +1,12 @@
+#sprite {
+  width: 128px;
+  height: 128px;
+  bottom: 0;
+  z-index: 1;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+canvas {
+  position: absolute;
+}

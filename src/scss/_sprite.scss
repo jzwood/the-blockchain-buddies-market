@@ -1,0 +1,21 @@
+.game-wrapper {
+  width: 100vw;
+  min-width: 256px;
+  height: 50vh;
+  position: relative;
+  overflow: hidden;
+  background-color: #C1E8D7;
+}
+
+#game {
+  width: 128px;
+  height: 128px;
+  bottom: 0;
+  z-index: 1;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+canvas {
+  position: absolute;
+}

@@ -4,13 +4,11 @@
   display: flex;
   align-items: center;
   overflow: scroll;
-
   .menu {
     display: flex;
     background-color: #f9f9f9;
     padding: 10px 0;
   }
-
   .image-box {
     overflow: hidden;
     width: 128px;
@@ -20,34 +18,39 @@
     line-height: 154px;
     transform: scale(0.85);
     transition: transform 0.2s ease-out;
-
     &:hover {
       transform: scale(1);
       cursor: pointer;
     }
   }
-
-
-  .copy {
+  ul.copy {
     font-size: 14px;
     font-family: Lucida Console, Lucida Sans Typewriter, monaco, Bitstream Vera Sans Mono, monospace;
     text-align: center;
-
-    .pricetag {
-
+    li {
+      padding-bottom: 2px;
     }
+    .pricetag {
+      button {
+        padding: 2px;
+      }
+    }
+    .name {}
+    .owner {
+      //word-break: break-all;
+      width: 6ch;
+      margin: 0 auto;
+      overflow: hidden;
 
-    .name {
-
+      &:hover {
+        cursor: text;
+      }
     }
   }
-
-
   img {
     width: 256px;
     height: 256px;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
-
   }
 }

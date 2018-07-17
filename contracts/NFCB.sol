@@ -1,7 +1,7 @@
 pragma solidity ^0.4.17;
 
 contract NFCB {
-  uint8 private maxKey;
+  uint8 private numKeys = 0;
   uint8 private constant maxTokens = 255;
 
   address private CEO;
@@ -17,32 +17,26 @@ contract NFCB {
 
   constructor() public {
     CEO = msg.sender;
-    maxKey = 1;
-    keyToOwner.push(address(0));
   }
 
-  event NewCryptoBuddy(
-    bytes16 name,
-    uint256 price
-  );
+  event NewCryptoBuddy( bytes16 name, uint256 price);
 
-  function mint(bytes16 _name, uint256 _price) payable public {
+  function mint(bytes16 _name, uint256 _price) public {
     address minter = msg.sender;
-    require(minter == CEO && maxKey < maxTokens);
+    require(minter == CEO && numKeys < maxTokens);
     Token memory newToken = Token(_name, _price, true);
-    uint8 key = ++maxKey;
+    uint8 key = numKeys++;
     tokenMap[key] = newToken;
     keyToOwner.push(CEO);
     emit NewCryptoBuddy(_name, _price);
   }
 
   function buy(uint8 _key) payable external {
-    require(_key > 0 && _key <= maxKey);
+    require(_key >= 0 && _key < numKeys);
     uint256 payment = msg.value;
     Token memory token = tokenMap[_key];
     require(token.available && token.price <= payment);
     address owner = keyToOwner[_key];
-    assert(owner != address(0));
     owner.transfer(token.price);
     keyToOwner[_key] = msg.sender;
   }

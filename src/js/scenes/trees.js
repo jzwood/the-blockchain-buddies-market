@@ -44,15 +44,15 @@ function newAlder({key, height, rate, xpos, delay}){
   function update(c) {
     canvas = c
     if(!initialized) {
-      init()
+      init(key)
       main()
       initialized = true
     }
   }
 
-  function init() {
+  function init(key) {
     context = canvas.getContext('2d')
-    canvas.style.zIndex = Date.now() % 2
+    canvas.style.zIndex = key % 2
     canvas.style.left = `${xpos}px`
   }
 

@@ -1,11 +1,8 @@
 {
-  "name": "simpledapp",
+  "name": "blockchainbuddies",
   "version": "1.0.0",
   "description": "",
-  "main": "truffle-config.js",
-  "directories": {
-    "test": "test"
-  },
+  "main": "truffle.js",
   "dependencies": {
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
@@ -15,11 +12,14 @@
   "devDependencies": {
     "autoprefixer": "^8.6.5",
     "babel-core": "^6.26.3",
-    "babel-plugin-transform-runtime": "^6.23.0",
     "ganache-cli": "^6.1.6",
     "node-sass": "^4.9.1"
   },
   "scripts": {
+    "ganache": "npx ganache-cli",
+    "compile": "truffle compile",
+    "migrate": "truffle migrate --network development",
+    "remigrate": "truffle migrate --network development --reset",
     "start": "parcel src/index.html"
   },
   "author": "Jake Wood",

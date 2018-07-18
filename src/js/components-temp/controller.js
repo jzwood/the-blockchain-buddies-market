@@ -1,8 +1,11 @@
+import React from 'react'
+import { render } from 'react-dom'
+
+
 import { renderCharBoxes } from './menu'
 
 import druidImagePath from '../assets/druid.png'
 import romanImagePath from '../assets/roman.png'
-
 
 document.addEventListener('DOMContentLoaded', main)
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { newAnimation } from './animation'
+import { newAnimation } from './utils'
 
 import { tokenContract } from './blockchain/contract'
 

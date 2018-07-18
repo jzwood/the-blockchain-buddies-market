@@ -3,7 +3,7 @@
  */
 export const LOAD_SCENE = 'LOAD_SCENE'
 export const ADD_SPRITE = 'ADD_SPRITE'
-export const BUY_SPRITE = 'BUY_SPRITE'
+export const BUY_TOKEN = 'BUY_SPRITE'
 export const REMOVE_ALL_SPRITES = 'REMOVE_ALL_SPRITES'
 export const ADD_MENUBOX = 'ADD_MENUBOX'
 
@@ -28,10 +28,11 @@ export const removeAllSprites = () => ({
   type: REMOVE_ALL_SPRITES
 })
 
-export function buySprite(index) {
+export function buyToken(index, address) {
   return {
-    type: BUY_SPRITE,
-    index
+    type: BUY_TOKEN,
+    index,
+    address
   }
 }
 

@@ -27,13 +27,13 @@ const Bin = props => (
 
 // type checking
 Bin.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   price: PropTypes.number,
-  available: PropTypes.bool.isRequired,
-  address: PropTypes.string.isRequired,
+  available: PropTypes.bool,
+  address: PropTypes.string,
   image: PropTypes.string,
-  onSelect: PropTypes.func.isRequired,
-  onBuy: PropTypes.func.isRequired,
+  onSelect: PropTypes.func,
+  onBuy: PropTypes.func,
 }
 
 // simply a component that needs a bunch of data to render

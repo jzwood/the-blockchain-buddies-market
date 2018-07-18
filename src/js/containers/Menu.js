@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { loadScene, buySprite, addSprite } from '../actions'
+import { loadScene, buyToken, addSprite } from '../actions'
 import MenuBins from '../components/MenuBins'
 
 const mapStateToProps = (state, ownProps) => ({
@@ -8,7 +8,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onSelect: key => dispatch(loadScene(key)),
-  onBuy: key =>  dispatch(buySprite(key))
+  onBuy: (key, address) =>  dispatch(buyToken(key, address))
 })
 
 export default connect(

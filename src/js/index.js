@@ -5,6 +5,8 @@ import { Provider } from 'react-redux'
 import rootReducer from './reducers'
 import App from './components/App'
 
+import emitterEngine from './daemons/tokenEmitter'
+
 function main() {
   const store = createStore(
     rootReducer,
@@ -16,6 +18,8 @@ function main() {
     </Provider>,
     document.getElementById('root')
   )
+
+  emitterEngine.start()
 }
 
 if (document.readyState == 'loading') {

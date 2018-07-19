@@ -24,7 +24,8 @@
     "compile": "truffle compile",
     "migrate": "truffle migrate --network development",
     "remigrate": "truffle migrate --network development --reset",
-    "start": "parcel src/index.html"
+    "start": "parcel src/index.html",
+    "nuke": "trash .cache && trash dist"
   },
   "author": "Jake Wood",
   "license": "MIT"

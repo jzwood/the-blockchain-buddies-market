@@ -1,32 +1,22 @@
 /*
  * action types
  */
+
+export const SET_USER = 'SET_USER'
+export const BUY_TOKEN = 'BUY_TOKEN'
+export const ADD_TOKEN = 'ADD_TOKEN'
 export const LOAD_SCENE = 'LOAD_SCENE'
-export const ADD_SPRITE = 'ADD_SPRITE'
-export const BUY_TOKEN = 'BUY_SPRITE'
-export const REMOVE_ALL_SPRITES = 'REMOVE_ALL_SPRITES'
-export const ADD_MENUBOX = 'ADD_MENUBOX'
+export const SET_SPRITE = 'SET_SPRITE'
 
 /*
  * action creators
  */
-export function loadScene(index) {
+export function setUser(address) {
   return {
-    type: LOAD_SCENE,
-    index
+    type: SET_USER,
+    address
   }
 }
-
-export function addSprite(index) {
-  return {
-    type: ADD_SPRITE,
-    index
-  }
-}
-
-export const removeAllSprites = () => ({
-  type: REMOVE_ALL_SPRITES
-})
 
 export function buyToken(index, address) {
   return {
@@ -36,9 +26,23 @@ export function buyToken(index, address) {
   }
 }
 
-export function addMenubox(index) {
+export function addToken(attributes) {
   return {
-    type: ADD_MENUBOX,
+    type: ADD_TOKEN,
+    attributes
+  }
+}
+
+export function loadScene(index) {
+  return {
+    type: LOAD_SCENE,
+    index
+  }
+}
+
+export function setSprite(index) {
+  return {
+    type: SET_SPRITE,
     index
   }
 }

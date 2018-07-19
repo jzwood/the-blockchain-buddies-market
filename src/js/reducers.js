@@ -1,17 +1,41 @@
-import { LOAD_SCENE, ADD_SPRITE, BUY_TOKEN, REMOVE_ALL_SPRITES, ADD_MENUBOX } from './actions'
+import { SET_USER, BUY_TOKEN, ADD_TOKEN, LOAD_SCENE, SET_SPRITE } from './actions'
+import spriteList from '../assets/_getSprites'
 
-const initialState = {menu: [{name: 'test', price: 100, available: true, address: '0x1234'}]}
+// token example: { name: 'Druid', price: 0.001, available: true, address: '0x1234' }
+
+const initialState = {
+  menu: [],
+  spriteList,
+  sprite: null,
+  scene: null,
+  user: null
+}
 
 export default function rootReducer(state={...initialState}, action) {
   return {
-    [LOAD_SCENE]: {...state, ...{scene: action.index}},
+    //sets address for user
+    [SET_USER]: {...state, ...{user: action.address}},
+
+    //updates menu item with new owner address and switches "for sale" to false
     get [BUY_TOKEN]() {
+      const preBins = state.menu.slice(0,action.index)
       const newBin = {...state.menu[action.index], ...{available: false, address: action.address}}
-      console.log(state.menu, action.index, newBin)
-      return {...state, ...{menu: [...state.menu.slice(0,action.index), newBin, ...state.menu.slice(action.index + 1)]}}
+      const postBins = state.menu.slice(action.index + 1)
+      return {...state, ...{menu: [...preBins, newBin, ...postBin]}}
     },
-    [ADD_SPRITE]: {...state, ...{sprite: action.index}},
-    [REMOVE_ALL_SPRITES]: {...state, ...{sprite: action.index}},
-    [ADD_MENUBOX]: {...state, ...{menu: [...state.menu, action.attributes]}},
+
+    //adds token to menu {name, address, available, price}
+    get [ADD_TOKEN]() {
+      const menu = [...state.menu, action.attributes]
+      const isNew = !state.menu.find(token => token.name === action.attributes.name)
+      return isNew ? {...state, menu} : state
+    },
+
+    //changes scene index
+    [LOAD_SCENE]: {...state, ...{scene: action.index}},
+
+    //adds sprite to scene if sprite it exists
+    [SET_SPRITE]: {...state, ...{sprite: action.index}},
+
   }[action.type] || state
 }

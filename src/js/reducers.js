@@ -7,7 +7,7 @@ const initialState = {
   menu: [],
   spriteList,
   sprite: null,
-  scene: null,
+  scene: -1,
   user: null
 }
 
@@ -21,7 +21,7 @@ export default function rootReducer(state={...initialState}, action) {
       const preBins = state.menu.slice(0,action.index)
       const newBin = {...state.menu[action.index], ...{available: false, address: action.address}}
       const postBins = state.menu.slice(action.index + 1)
-      return {...state, ...{menu: [...preBins, newBin, ...postBin]}}
+      return {...state, ...{menu: [...preBins, newBin, ...postBins]}}
     },
 
     //adds token to menu {name, address, available, price}

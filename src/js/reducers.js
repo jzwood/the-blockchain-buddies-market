@@ -1,4 +1,4 @@
-import { SET_USER, BUY_TOKEN, ADD_TOKEN, LOAD_SCENE, SET_SPRITE } from './actions'
+import { SET_USER, BUY_TOKEN, ADD_TOKEN, SET_INDEX } from './actions'
 import spriteList from '../assets/_getSprites'
 
 // token example: { name: 'Druid', price: 0.001, available: true, address: '0x1234' }
@@ -6,8 +6,7 @@ import spriteList from '../assets/_getSprites'
 const initialState = {
   menu: [],
   spriteList,
-  sprite: null,
-  scene: -1,
+  index: -1,
   user: null
 }
 
@@ -31,11 +30,8 @@ export default function rootReducer(state={...initialState}, action) {
       return isNew ? {...state, menu} : state
     },
 
-    //changes scene index
-    [LOAD_SCENE]: {...state, ...{scene: action.index}},
-
-    //adds sprite to scene if sprite it exists
-    [SET_SPRITE]: {...state, ...{sprite: action.index}},
+    //changes scene/sprite index
+    [SET_INDEX]: {...state, ...{index: action.index}},
 
   }[action.type] || state
 }

@@ -1,13 +1,6 @@
 import React from 'react'
-import { render, unmountComponentAtNode } from 'react-dom'
-import { mod } from './utils'
+import { mod, newAnimation } from '../utils'
 
-import * as trees from './scenes/trees'
-import * as aqueducts from './scenes/aqueducts'
-//import * as aqueducts from './scenes/aqueducts'
-const scenes = [trees, aqueducts]
-
-const componentRoot = document.querySelector('.sprite-wrapper')
 const keyMemory = {}
 const is = {
   get right() {
@@ -31,24 +24,31 @@ const keydown = event => {
   keyMemory[event.keyCode] = true
 }
 
-function setup(url, index) {
+export default { setup, teardown }
+
+async function setup(url, canvasElement) {
+  const render = await initSprite(url, canvasElement)
+  newAnimation.start()
+  newAnimation.update(render)
   document.addEventListener('keydown', keydown, false)
   document.addEventListener('keyup', keyup, false)
-  scenes[index] && scenes[index].render()
-  const spriteCanvas = render( <canvas id = "sprite" width = { 24 } height = { 24 }/>, componentRoot)
-  return newSprite(url, { canvas: spriteCanvas, width: 48, height: 48, cellsWide: 2, cellsHigh: 2 })
 }
 
-function teardown(index) {
-  scenes.forEach(scene => scene.unmount())
+function teardown() {
+  newAnimation.stop()
   document.removeEventListener('keydown', keydown, false)
   document.removeEventListener('keyup', keyup, false)
-  unmountComponentAtNode(componentRoot)
 }
 
-export { setup as render, teardown as unmount }
+function initSprite(url, canvasElement) {
+  return newSprite(url, { canvas: canvasElement, cWidth: 24, cHeight: 24, width: 48, height: 48, cellsWide: 2, cellsHigh: 2 })
+}
 
-function newSprite(imgPath, { canvas, width, height, cellsWide, cellsHigh }) {
+function newSprite(imgPath, { canvas, cWidth, cheight, width, height, cellsWide, cellsHigh }) {
+
+  canvas.style.width = cWidth
+  canvas.style.height = cHeight
+
   const context = canvas.getContext('2d')
   const image = new Image()
   const TICKS_PER_FRAME = 15

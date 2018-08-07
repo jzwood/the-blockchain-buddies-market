@@ -9,20 +9,29 @@ export function mod(val, base) {
 // simple range
 export function range(start, stop, step) {
   const arr = []
-  for(; start <= stop; start += step) {
+  for (; start <= stop; start += step) {
     arr.push(start)
   }
   return arr
 }
 
 export function newAnimation() {
-  const call = fxn => fxn()
-  const update = []
+  let kill = false
+  let render = () => {}
   const loop = () => {
-    update.forEach(call)
+    if (this.kill) return
+    render()
     requestAnimationFrame(loop)
   }
-  loop()
+  return {
+    start: loop,
+    stop() {
+      kill = true
+    },
+    set update(fxn) {
+      render = fxn
+    }
+  }
 
-  return {update}
 }
+

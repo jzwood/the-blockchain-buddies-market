@@ -5,8 +5,7 @@
 export const SET_USER = 'SET_USER'
 export const BUY_TOKEN = 'BUY_TOKEN'
 export const ADD_TOKEN = 'ADD_TOKEN'
-export const LOAD_SCENE = 'LOAD_SCENE'
-export const SET_SPRITE = 'SET_SPRITE'
+export const SET_INDEX = 'SET_INDEX'
 
 /*
  * action creators
@@ -33,16 +32,9 @@ export function addToken(attributes) {
   }
 }
 
-export function loadScene(index) {
+export function setIndex(index) {
   return {
-    type: LOAD_SCENE,
-    index
-  }
-}
-
-export function setSprite(index) {
-  return {
-    type: SET_SPRITE,
+    type: SET_INDEX,
     index
   }
 }

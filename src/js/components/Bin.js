@@ -25,6 +25,10 @@ const Bin = props => (
   </article>
 )
 
+getImage.propTypes = {
+  image: PropTypes.string
+}
+
 // type checking
 Bin.propTypes = {
   name: PropTypes.string,

@@ -19,12 +19,15 @@ export function newAnimation() {
   let kill = false
   let render = () => {}
   const loop = () => {
-    if (this.kill) return
+    if (kill) return
     render()
     requestAnimationFrame(loop)
   }
   return {
-    start: loop,
+    start(){
+      kill = false
+      loop()
+    },
     stop() {
       kill = true
     },

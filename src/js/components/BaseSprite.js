@@ -1,6 +1,6 @@
-import React from 'react'
 import { mod, newAnimation } from '../utils'
 
+const animate = newAnimation()
 const keyMemory = {}
 const is = {
   get right() {
@@ -28,27 +28,23 @@ export default { setup, teardown }
 
 async function setup(url, canvasElement) {
   const render = await initSprite(url, canvasElement)
-  newAnimation.start()
-  newAnimation.update(render)
+  animate.start()
+  animate.update = render
   document.addEventListener('keydown', keydown, false)
   document.addEventListener('keyup', keyup, false)
 }
 
 function teardown() {
-  newAnimation.stop()
+  animate.stop()
   document.removeEventListener('keydown', keydown, false)
   document.removeEventListener('keyup', keyup, false)
 }
 
 function initSprite(url, canvasElement) {
-  return newSprite(url, { canvas: canvasElement, cWidth: 24, cHeight: 24, width: 48, height: 48, cellsWide: 2, cellsHigh: 2 })
+  return newSprite(url, { canvas: canvasElement, width: 48, height: 48, cellsWide: 2, cellsHigh: 2 })
 }
 
-function newSprite(imgPath, { canvas, cWidth, cheight, width, height, cellsWide, cellsHigh }) {
-
-  canvas.style.width = cWidth
-  canvas.style.height = cHeight
-
+function newSprite(imgPath, { canvas, width, height, cellsWide, cellsHigh }) {
   const context = canvas.getContext('2d')
   const image = new Image()
   const TICKS_PER_FRAME = 15

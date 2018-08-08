@@ -7,27 +7,38 @@ import BaseSprite from '../components/BaseSprite'
 export class Sprite extends React.Component {
   constructor() {
     super()
+    this.loading = false
+    this.setup = this.setup.bind(this)
+    this.teardown = this.teardown.bind(this)
   }
 
-  componentDidMount() {
+  async setup(){
     const url = this.props.url
+    await this.teardown()
     if(url) {
-      BaseSprite(url, this.canvas).then(sprite => {
-        this.sprite = sprite
-        if(!this.teardown) {
-          this.sprite.setup()
-        }
-      })
+      this.status = BaseSprite.setup(url, this.canvas)
     }
   }
 
+  async teardown(){
+    await Promise.resolve(this.status)
+    BaseSprite.teardown()
+  }
+
+  componentDidUpdate(prevProps){
+    this.setup()
+  }
+
+  componentDidMount() {
+    this.setup()
+  }
+
   componentWillUnmount() {
-    this.teardown = true
-    this.sprite && this.sprite.teardown()
+    this.teardown()
   }
 
   render() {
-    return ( <canvas ref={ canvas => { this.canvas = canvas }} id="sprite" />)
+    return ( <canvas ref={ canvas => { this.canvas = canvas }} id="sprite" width="24" height="24" />)
   }
 }
 

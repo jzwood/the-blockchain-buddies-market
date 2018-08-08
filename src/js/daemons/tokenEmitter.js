@@ -13,5 +13,5 @@ function start() {
   const tokenEvent = new CustomEvent(ADD_TOKEN, {detail: STUB_TOKEN})
   setTimeout(() => {
     document.dispatchEvent(tokenEvent)
-  }, 2500)
+  }, 500)
 }

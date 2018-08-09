@@ -14,6 +14,13 @@ const STUB_TOKEN_2 = {
   address: '0x12345'
 }
 
+const STUB_TOKEN_3 = {
+  name: 'mystery',
+  price: 0.011,
+  available: true,
+  address: '0x4321'
+}
+
 export default {start}
 
 function start() {
@@ -26,4 +33,9 @@ function start() {
   setTimeout(() => {
     document.dispatchEvent(tokenEvent2)
   }, 1500)
+
+  const tokenEvent3 = new CustomEvent(ADD_TOKEN, {detail: STUB_TOKEN_3})
+  setTimeout(() => {
+    document.dispatchEvent(tokenEvent3)
+  }, 2500)
 }

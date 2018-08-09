@@ -1,6 +1,6 @@
 import { mod, newAnimation } from '../utils'
 
-const animate = newAnimation()
+let animate
 const keyMemory = {}
 const is = {
   get right() {
@@ -28,6 +28,7 @@ export default { setup, teardown }
 
 async function setup(url, canvasElement) {
   const render = await initSprite(url, canvasElement)
+  animate = newAnimation(url)
   animate.start()
   animate.update = render
   document.addEventListener('keydown', keydown, false)
@@ -35,7 +36,7 @@ async function setup(url, canvasElement) {
 }
 
 function teardown() {
-  animate.stop()
+  animate && animate.stop()
   document.removeEventListener('keydown', keydown, false)
   document.removeEventListener('keyup', keyup, false)
 }

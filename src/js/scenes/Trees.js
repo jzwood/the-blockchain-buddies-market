@@ -1,5 +1,5 @@
 import React from 'react'
-import { mod, range } from '../../utils'
+import { mod, range } from '../utils'
 
 function addAlder({key, height, rate, xpos, delay}){
   let canvas, context, initialized = false

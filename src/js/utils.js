@@ -15,7 +15,7 @@ export function range(start, stop, step) {
   return arr
 }
 
-export function newAnimation() {
+export function newAnimation(id) {
   let kill = false
   let render = () => {}
   const loop = () => {

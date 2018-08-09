@@ -29,6 +29,8 @@ export default class Aqueduct extends React.Component {
     super()
     this.width = screen.width
     this.height = 350
+    this.background = document.querySelector('.game-wrapper')
+    if(this.background) this.background.style.backgroundColor = 'darkgray'
   }
 
   componentDidMount () {

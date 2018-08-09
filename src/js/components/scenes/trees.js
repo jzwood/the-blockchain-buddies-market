@@ -1,45 +1,15 @@
 import React from 'react'
-import { render, unmountComponentAtNode } from 'react-dom'
-import { mod, range } from '../utils'
+import { mod, range } from '../../utils'
 
-const background = document.querySelector('.game-wrapper')
-const componentRoot = document.querySelector('.environment-wrapper')
-
-function renderTrees() {
-  background.style.backgroundColor = '#C1E8D7'
-  const width = screen.width
-  const step = 400
-  window.range = range
-  const alderCanvases = range(0, width + step, step).reduce((a,i,index) => a.concat([
-    newAlder({key: i * 2, height: 8, rate: 500, xpos: i - 200, delay: 500 + (i + 100)}),
-    newAlder({key: i * 2 + 1, height: 6, rate: 500, xpos: i, delay: 500 + (i + 250)})
-  ]), [])
-
-  const alderProps = prop => alderCanvases.map(alder => alder[prop])
-  render(alderProps('canvas'), componentRoot, () => {
-    const elems = [...componentRoot.children].filter(canvas => canvas.classList.contains('tree'))
-    alderProps('update').forEach((e,i) => {
-      e(elems[i])
-    })
-  })
-}
-
-function unmountTrees() {
-  background.style.backgroundColor = ''
-  unmountComponentAtNode(componentRoot)
-}
-
-export {renderTrees as render, unmountTrees as unmount}
-
-function newAlder({key, height, rate, xpos, delay}){
+function addAlder({key, height, rate, xpos, delay}){
   let canvas, context, initialized = false
 
   const [canWidth, canHeight] = [600, 500]
-  const reactCanvas = <canvas className="canvas alder tree" key={`alder-${key}`} width={canWidth} height={canHeight}/>
   const avg = (a, b) => 0.5 * (a + b)
   const deg_to_rad = Math.PI / 180.0
 
-  return { canvas: reactCanvas, update}
+  //return <canvas ref={ update } className="canvas alder tree" key={`alder-${key}`} width={canWidth} height={canHeight}/>
+  return <canvas ref={update} className="canvas alder tree" key={`alder-${key}`} width={canWidth} height={canHeight}/>
 
   function update(c) {
     canvas = c
@@ -100,5 +70,23 @@ function newAlder({key, height, rate, xpos, delay}){
     if (depth < 3) {
       leaf(x1, y1, 15, '#68bb68')
     }
+  }
+}
+
+export default class Trees extends React.Component {
+  constructor () {
+    super()
+    this.background = document.querySelector('.game-wrapper')
+    if(this.background) this.background.style.backgroundColor = 'lightgreen'
+  }
+
+  render() {
+    const width = screen.width
+    const step = 400
+    return range(0, width + step, step).reduce((trees,i) => {
+      const t1 = addAlder({key: i * 2, height: 8, rate: 500, xpos: i - 200, delay: 500 + (i + 100)})
+      const t2 = addAlder({key: i * 2 + 1, height: 6, rate: 500, xpos: i, delay: 500 + (i + 250)})
+      return trees.concat(t1, t2)
+    }, [])
   }
 }

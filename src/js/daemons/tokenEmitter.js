@@ -1,7 +1,14 @@
 import { ADD_TOKEN } from '../actions'
 
 const STUB_TOKEN = {
-  name: 'my token',
+  name: 'the roman',
+  price: 0.0131,
+  available: true,
+  address: '0x12345'
+}
+
+const STUB_TOKEN_2 = {
+  name: 'the druid',
   price: 0.0131,
   available: true,
   address: '0x12345'
@@ -14,4 +21,9 @@ function start() {
   setTimeout(() => {
     document.dispatchEvent(tokenEvent)
   }, 500)
+
+  const tokenEvent2 = new CustomEvent(ADD_TOKEN, {detail: STUB_TOKEN_2})
+  setTimeout(() => {
+    document.dispatchEvent(tokenEvent2)
+  }, 1500)
 }

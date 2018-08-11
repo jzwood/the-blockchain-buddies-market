@@ -1,10 +1,10 @@
-import Web3 from 'web3'
+import web3provider from './web3Provider'
 import contract from 'truffle-contract'
 import nfcb_artifacts from '../../../build/contracts/NFCB.json'
 
-export function tokenContract(){
+export default function tokenContract() {
   const NFCB = contract(nfcb_artifacts)
-  initWeb3Provider(NFCB)
+  NFCB.setProvider(web3Provider)
 
   let defaultAccount = web3.eth.defaultAccount = web3.eth.accounts[0]
   let message = {
@@ -63,10 +63,4 @@ export function tokenContract(){
       console.warn('Modify Error', err)
     }
   }
-}
-
-function initWeb3Provider(contract) {
-  // If no injected web3 instance is detected, fall back to Ganache
-  const web3Provider = (typeof web3 !== 'undefined') ? web3.currentProvider : new Web3.providers.HttpProvider('http://localhost:8545')
-  contract.setProvider(web3Provider)
 }

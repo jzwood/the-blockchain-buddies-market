@@ -8,6 +8,6 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 const sceneList = [<Aqueduct key='s0' />, <Trees key='s1' />]
-const Scene = ({sceneIndex}) => sceneList[sceneIndex] || <div className='intro'>blockchain buddies market</div>
+const Scene = ({sceneIndex}) => sceneList[sceneIndex] || null
 
 export default connect(mapStateToProps, null)(Scene)

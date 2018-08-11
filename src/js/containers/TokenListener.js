@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { addToken, ADD_TOKEN } from '../actions'
 
 class TokenListener extends Component {
-  constructor () {
+  constructor() {
     super()
 
     this.onNewToken = e => {
@@ -14,15 +14,15 @@ class TokenListener extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     document.addEventListener(ADD_TOKEN, this.onNewToken)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     document.removeEventListener(ADD_TOKEN, this.onNewToken)
   }
 
-  render () {
+  render() {
     return null
   }
 }

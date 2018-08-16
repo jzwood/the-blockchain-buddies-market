@@ -2,14 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Bin from './Bin'
 
-const MenuBins = ({ buddies, onSelect, onBuy}) => (
+const MenuBins = ({ buddies, address, onSelect, onBuy}) => (
   <article className='menu'>
     {buddies.map((props, key) => (
       <Bin
         key={`bin-${key}`}
         {...props}
         onSelect={() => onSelect(key)}
-        onBuy={() => onBuy(key, props.address)}
+        onBuy={() => onBuy(key, address)}
       />
     ))}
   </article>

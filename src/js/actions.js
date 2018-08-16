@@ -4,8 +4,10 @@
 
 export const SET_USER = 'SET_USER'
 export const BUY_TOKEN = 'BUY_TOKEN'
-export const ADD_TOKEN = 'ADD_TOKEN'
+export const UPDATE_TOKEN_LIST = 'UPDATE_TOKEN_LIST'
 export const SET_INDEX = 'SET_INDEX'
+
+export const BLOCKCHAIN_EVENT = 'BLOCKCHAIN_EVENT'
 
 /*
  * action creators
@@ -25,10 +27,10 @@ export function buyToken(index, address) {
   }
 }
 
-export function addToken(attributes) {
+export function updateTokenList(tokens) {
   return {
-    type: ADD_TOKEN,
-    attributes
+    type: UPDATE_TOKEN_LIST,
+    tokens
   }
 }
 

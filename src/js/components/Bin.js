@@ -1,14 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { buy, ownerOf } from '../blockchain/contract'
 
 const getImage = ({image}) => image ? <img src={image} width="128" height="128"/> : '�'
-const parsePrice = ({name, price, available, onBuy}) => {
+const parsePrice = ({name, price, available, address, onBuy}) => {
   if (available) {
     return <button className='buy-button' onClick={onBuy}>Ξ{price}</button>
   }
 
   if (name) {
-    return <span className="nosale">not for sale</span>
+    return <i className="nosale">bought</i>
   }
 
   return 'no data'
@@ -20,7 +21,7 @@ const Bin = props => (
     <ul className='copy'>
       <li className='pricetag'>{parsePrice(props)}</li>
       <li className='name'>{props.name}</li>
-      <li className='owner' title={props.address}>{props.address}</li>
+      <li className='owner' style={{backgroundColor: 'white'}} title={props.address}>{props.address}</li>
     </ul>
   </article>
 )

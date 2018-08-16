@@ -17,14 +17,15 @@
     "autoprefixer": "^8.6.5",
     "babel-core": "^6.26.3",
     "ganache-cli": "^6.1.6",
-    "node-sass": "^4.9.1"
+    "node-sass": "^4.9.1",
+    "solc": "^0.4.24"
   },
   "scripts": {
-    "ganache": "npx ganache-cli",
+    "ganache": "npx ganache-cli -p 8545 -h 127.0.0.1",
     "compile": "truffle compile",
     "migrate": "truffle migrate --network development",
     "remigrate": "truffle migrate --network development --reset",
-    "start": "parcel src/index.html",
+    "start": "parcel src/index.html --no-cache",
     "nuke": "rm -r .cache"
   },
   "author": "Jake Wood",

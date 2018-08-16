@@ -1,25 +1,30 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { getTokens } from '../blockchain/contract'
 
-import { addToken, ADD_TOKEN } from '../actions'
+import { updateTokenList, UPDATE_TOKEN_LIST, BLOCKCHAIN_EVENT } from '../actions'
 
 class TokenListener extends Component {
   constructor() {
     super()
 
-    this.onNewToken = e => {
-      console.log(e.detail)
-      this.props.addToken(e.detail)
+    console.log('tokenListener setup')
+
+    this.onNewToken = async e => {
+      console.log('token listener', e.detail)
+      const tokens = await getTokens()
+      console.log('mintedTokens:', tokens)
+      this.props.updateTokenList(tokens)
     }
   }
 
   componentDidMount() {
-    document.addEventListener(ADD_TOKEN, this.onNewToken)
+    document.addEventListener(BLOCKCHAIN_EVENT, this.onNewToken)
   }
 
   componentWillUnmount() {
-    document.removeEventListener(ADD_TOKEN, this.onNewToken)
+    document.removeEventListener(BLOCKCHAIN_EVENT, this.onNewToken)
   }
 
   render() {
@@ -28,11 +33,11 @@ class TokenListener extends Component {
 }
 
 TokenListener.propTypes = {
-  addToken: PropTypes.func.isRequired
+  updateTokenList: PropTypes.func.isRequired
 }
 
 const mapDispatchToProps = {
-  addToken
+  updateTokenList
 }
 
 export default connect(null, mapDispatchToProps)(TokenListener)

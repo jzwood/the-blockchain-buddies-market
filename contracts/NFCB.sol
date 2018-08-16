@@ -1,7 +1,7 @@
 pragma solidity ^0.4.17;
 
 contract NFCB {
-  uint8 private numKeys = 0;
+  uint8 public numKeys = 0;
   uint8 private constant maxTokens = 255;
 
   address private CEO;
@@ -11,7 +11,7 @@ contract NFCB {
 
   struct Token {
     bytes16 name;
-    uint256 price; //in wei
+    uint256 price; // in Wei
     bool available;
   }
 

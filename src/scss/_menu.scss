@@ -22,11 +22,15 @@
     margin: 0 auto;
     width: 128px;
     height: 128px;
-    text-align: center;
-    font-size: 76pt;
-    line-height: 154px;
     transform: scale(0.85);
     transition: transform 0.2s ease-out;
+
+    .unknown {
+      font-family: Pixel;
+      font-size: 250px;
+      line-height: 65px;
+      text-align: center;
+    }
 
     &:hover {
       transform: scale(1);
@@ -51,8 +55,8 @@
     .name {}
 
     .owner {
-      //word-break: break-all;
-      width: 6ch;
+      text-overflow: ellipsis;
+      width: 8ch;
       margin: 0 auto;
       overflow: hidden;
 

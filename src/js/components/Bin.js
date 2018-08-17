@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { buy, ownerOf } from '../blockchain/contract'
 
-const getImage = ({image}) => image ? <img src={image} width="128" height="128"/> : '�'
+const getImage = ({image}) => image ? <img src={image} width="128" height="128"/> : <div className="unknown">?</div>
 const parsePrice = ({name, price, available, address, onBuy}) => {
   if (available) {
     return <button className='buy-button' onClick={onBuy}>Ξ{price}</button>

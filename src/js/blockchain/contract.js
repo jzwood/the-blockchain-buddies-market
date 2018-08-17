@@ -56,17 +56,6 @@ export async function initEventEmitter() {
   }
 }
 
-export async function mint(name, eth, msg) {
-  try {
-    console.info(`Attempting to mint: ${name}, for ${eth} eth by ${JSON.stringify(msg)}`)
-    const instance = await NFCB.deployed()
-    const receipt = await instance.mint(name, eth, msg)
-    console.log(receipt)
-  } catch (err) {
-    console.warn('Minting Error', err)
-  }
-}
-
 export async function buy(key, msg) {
   try {
     const instance = await NFCB.deployed()
@@ -83,6 +72,17 @@ async function ownerOf(key) {
     console.info(owner)
   } catch (err) {
     console.warn('OwnerOf Error',err)
+  }
+}
+
+export async function mint(name, eth, msg) {
+  try {
+    console.info(`Attempting to mint: ${name}, for ${eth} eth by ${JSON.stringify(msg)}`)
+    const instance = await NFCB.deployed()
+    const receipt = await instance.mint(name, eth, msg)
+    console.log(receipt)
+  } catch (err) {
+    console.warn('Minting Error', err)
   }
 }
 

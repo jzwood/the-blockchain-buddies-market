@@ -77,7 +77,14 @@ export default class Trees extends React.Component {
   constructor () {
     super()
     this.background = document.querySelector('.game-wrapper')
+  }
+
+  componentDidMount(){
     if(this.background) this.background.style.backgroundColor = 'lightgreen'
+  }
+
+  componentWillUnmount() {
+    if(this.background) this.background.style.backgroundColor = ''
   }
 
   render() {

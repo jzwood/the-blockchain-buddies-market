@@ -6,3 +6,14 @@
   top: 5px;
   z-index: 1;
 }
+
+.title-scene {
+  font-family: Pixel, Arial Black;
+  font-size: 100px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  text-align: center;
+  line-height: 0.5em;
+}

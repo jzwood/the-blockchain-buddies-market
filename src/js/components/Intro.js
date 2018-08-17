@@ -10,7 +10,7 @@ function getAddress(){
   }
 }
 
-const Intro = () => <nav className='intro'>blockchain buddies market. user: <Address /></nav>
+const Intro = () => <nav className='intro'>user: <Address /></nav>
 
 export default Intro
 

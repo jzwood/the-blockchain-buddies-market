@@ -30,10 +30,10 @@ export default class Aqueduct extends React.Component {
     this.width = screen.width
     this.height = 350
     this.background = document.querySelector('.game-wrapper')
-    if(this.background) this.background.style.backgroundColor = 'darkgray'
   }
 
   componentDidMount () {
+    if(this.background) this.background.style.backgroundColor = 'darkgray'
     const context = this.canvas.getContext('2d')
     context.fillStyle = 'lightblue'
 
@@ -43,6 +43,10 @@ export default class Aqueduct extends React.Component {
       drawAqueduct(context, offset * i,200,radius, 100)
       drawAqueduct(context, offset * i, 75, ~~(radius * 0.65), 50)
     }
+  }
+
+  componentWillUnmount() {
+    if(this.background) this.background.style.backgroundColor = ''
   }
 
   render () {

@@ -5,9 +5,12 @@ import { Provider } from 'react-redux'
 import rootReducer from './reducers'
 import App from './components/App'
 import { initTokenContract, initEventEmitter } from './blockchain/contract'
-import devGreeting from './daemons/devGreeting'
 
-import emitterEngine from './daemons/tokenEmitter'
+const devGreeting = `
+  ╔╗  ╔╗
+  ╠╩╗ ╠╩╗
+  ╚═╝o╚═╝o
+`
 
 async function main() {
   console.info(devGreeting)

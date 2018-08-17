@@ -10,12 +10,10 @@ export function initTokenContract() {
   const provider = web3provider()
   NFCB = contract(nfcb_artifacts)
   NFCB.setProvider(provider)
-  console.log(NFCB, 'contract inited')
 }
 
 export async function getTokens() {
   try {
-    console.info('collecting buddies')
     const instance = await NFCB.deployed()
     const buddies = []
     const parseBigNum = bigNum => parseInt(bigNum.toString(10),10)
@@ -25,11 +23,9 @@ export async function getTokens() {
       try {
         const buddy = await instance.tokenMap(key)
         let [name, price, available] = buddy
-        console.log(name, price, available)
         name = web3.toAscii(name).replace(/\0/g, '')
         price = parseFloat(web3.fromWei(price), 10)
         const address = await instance.ownerOf(key)
-        console.log({name, price, address, available})
         return {name, price, address, available}
       } catch (err) {
         console.warn(`No Token for key: ${key}`)
@@ -43,25 +39,19 @@ export async function getTokens() {
 
 export async function initEventEmitter() {
   try {
-    console.info('init event emitter', NFCB)
     const instance = await NFCB.deployed()
-    const cryptoBuddyEvent = instance.NewCryptoBuddy()
-    cryptoBuddyEvent.watch((error, result) => {
-      console.log('result', result)
-      const tokenEvent = new CustomEvent(BLOCKCHAIN_EVENT, { detail: { error, result }})
+    console.log('NFCB successfully deployed:',instance)
+    const createEvent = (error ='', result='') => new CustomEvent(BLOCKCHAIN_EVENT, { detail: { error, result }})
+    document.dispatchEvent(createEvent())
+
+    const cryptoBuddyEvents = instance.NewCryptoBuddy()
+    cryptoBuddyEvents.watch((error, result) => {
+      console.info(result)
+      const tokenEvent = createEvent(result)
       document.dispatchEvent(tokenEvent)
     })
   } catch(err) {
     console.log('InitEventEmitter Error', err)
-  }
-}
-
-export async function buy(key, msg) {
-  try {
-    const instance = await NFCB.deployed()
-    return await instance.buy(key, msg)
-  } catch(err) {
-    console.warn('Buy Error', err)
   }
 }
 
@@ -72,6 +62,15 @@ async function ownerOf(key) {
     console.info(owner)
   } catch (err) {
     console.warn('OwnerOf Error',err)
+  }
+}
+
+export async function buy(key, msg) {
+  try {
+    const instance = await NFCB.deployed()
+    return await instance.buy(key, msg)
+  } catch(err) {
+    console.warn('Buy Error', err)
   }
 }
 

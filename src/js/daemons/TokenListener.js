@@ -9,13 +9,13 @@ class TokenListener extends Component {
   constructor() {
     super()
 
-    console.log('tokenListener setup')
-
     this.onNewToken = async e => {
-      console.log('token listener', e.detail)
-      const tokens = await getTokens()
-      console.log('mintedTokens:', tokens)
-      this.props.updateTokenList(tokens)
+      try {
+        const tokens = await getTokens()
+        this.props.updateTokenList(tokens)
+      } catch (err) {
+        console.warn("NewToken Error", err)
+      }
     }
   }
 

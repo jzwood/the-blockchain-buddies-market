@@ -6,13 +6,6 @@ export function tokenContract(){
   const NFCB = contract(nfcb_artifacts)
   initWeb3Provider(NFCB)
 
-  let defaultAccount = web3.eth.defaultAccount = web3.eth.accounts[0]
-  let message = {
-    gas: 140000,
-    from: defaultAccount
-  }
-  console.log(message)
-
   return { mint, buy, ownerOf, modify, initEventEmitter }
 
   async function initEventEmitter() {

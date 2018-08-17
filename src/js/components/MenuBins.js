@@ -1,6 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Bin from './Bin'
+import { buy } from '../blockchain/contract'
+
+function attempTokenPurchase(key, address) {
+  return async () => {
+    try {
+    // gas 1000000
+      await buy(key, {gas: '140000', from: address})
+    } catch(err) {
+      console.warn(`Purchase of token: ${key} failed.`, err)
+    }
+  }
+}
 
 const MenuBins = ({ buddies, address, onSelect, onBuy}) => (
   <article className='menu'>
@@ -9,7 +21,7 @@ const MenuBins = ({ buddies, address, onSelect, onBuy}) => (
         key={`bin-${key}`}
         {...props}
         onSelect={() => onSelect(key)}
-        onBuy={() => onBuy(key, address)}
+        onBuy={attempTokenPurchase(key, address)}
       />
     ))}
   </article>
@@ -25,6 +37,7 @@ MenuBins.propTypes = {
     onSelect: PropTypes.func,
     onBuy: PropTypes.func,
   }).isRequired).isRequired,
+  address: PropTypes.string,
   onSelect: PropTypes.func,
   onBuy: PropTypes.func
 }

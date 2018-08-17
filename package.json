@@ -25,7 +25,7 @@
     "compile": "truffle compile",
     "migrate": "truffle migrate --network development",
     "remigrate": "truffle migrate --network development --reset",
-    "start": "parcel src/index.html --no-cache",
+    "start": "parcel src/index.html",
     "nuke": "rm -r .cache"
   },
   "author": "Jake Wood",

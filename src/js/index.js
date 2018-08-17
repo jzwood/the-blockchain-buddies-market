@@ -12,10 +12,8 @@ const devGreeting = `
   ╚═╝o╚═╝o
 `
 
-async function main() {
+function main() {
   console.info(devGreeting)
-  initTokenContract()
-  await initEventEmitter()
 
   const store = createStore(
     rootReducer,

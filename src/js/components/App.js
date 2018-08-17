@@ -3,8 +3,7 @@ import Sprite from '../containers/Sprite'
 import Intro from './Intro'
 import Scene from '../containers/Scene'
 import Menu from '../containers/Menu'
-import TokenListener from '../containers/TokenListener'
-import AddressListener from '../containers/AddressListener'
+import Daemons from '../daemons/Daemons'
 
 //<Sprite />
 const App = () => [
@@ -15,8 +14,7 @@ const App = () => [
   </section>,
   <section className="menu-wrapper" key="menu">
     <Menu />
-    <AddressListener />
-    <TokenListener />
+    <Daemons />
   </section>
 ]
 

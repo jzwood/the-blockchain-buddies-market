@@ -1,9 +1,8 @@
-# ! REPO UNDER CONSTRUCTION !
+<img src="support/demo_title.png" width="100%" alt="blockchain buddies"/>
 
 # Blockchain Buddies
 
-is a demo repo for getting started with [Solidity](https://solidity.readthedocs.io) where we'll make our own crypto-collectible marketplace!
-
+is a demo repo for a [crypto-collectible](https://www.cryptokitties.co) marketplace build with [Solidity](https://solidity.readthedocs.io) which walks through a few basic ways of interacting with a smart contract in a testing environment on the command line and the web.
 
 ## prereqs
 
@@ -86,9 +85,11 @@ Sometimes this errors out. Either try the above command again or
 
 If it hangs, open Metamask and see if it is trying to find the network. Not sure what this is about but wait until it connects again to check on the migration status (It can sometimes take a minute or two).
 
-### interact with contract via truffle
+## interacting with contract
 
-Let's add a cryptocollectible to our marketplace which is currently empty. We're gonna mint a new Blockchain Buddy (nfc721 token) with truffle.
+### truffle
+
+Let's add a cryptocollectible to our marketplace which is currently empty. We're gonna mint a new Blockchain Buddy ([erc-721](http://erc721.org) inspired token) with truffle.
 
 In a new terminal window run `$ truffle console`. Let's mint a new character called "kitty McKitty" costing 0.001 Ether:
 
@@ -133,7 +134,7 @@ truffle(development)> web3.eth.accounts[1]
 ```
 Amazing! Account 1 just purchased the Blockchain Buddy #0 from the CEO.
 
-### interact with contract via web client
+## web client
 
 From a new terminal window run:
 
@@ -141,11 +142,13 @@ From a new terminal window run:
 
 The cryptocollectible marketplace should be viewable via `http://127.0.0.1:1234`.
 
+<img src="support/demo_scenes.png" width="100%" />
 
+One should be able to purchase Buddies by clicking on the buy buttons beneath their icons. Metamask should open a popup confirming the transaction. You might have pop-ups blocks in which case  you might need to click on the Metamask extension icon to verify the transaction.
 
+**LICENCE**
 
-
-
+This project is licensed under the terms of the [MIT](https://opensource.org/licenses/MIT) license. Copyright © 2018 Jake Wood
 
 
 

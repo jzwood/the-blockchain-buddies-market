@@ -4,7 +4,6 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import rootReducer from './reducers'
 import App from './components/App'
-import { initTokenContract, initEventEmitter } from './blockchain/contract'
 
 const devGreeting = `
   ╔╗  ╔╗
@@ -15,14 +14,18 @@ const devGreeting = `
 function main() {
   console.info(devGreeting)
 
+  const hasMetamask = typeof web3 != 'undefined'
+  const fallback = <div className='fallback'><a href='https://github.com/jzwood/the-blockchain-buddies-market'>Blockchain Buddies</a> cryptocollectible marketplace requires Metamask to run! <a href="https://metamask.io" target="_blank">https://metamask.io</a></div>
+
   const store = createStore(
     rootReducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
   render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
+    hasMetamask ?
+      <Provider store={store}>
+        <App />
+      </Provider> : fallback,
     document.getElementById('root')
 
   )

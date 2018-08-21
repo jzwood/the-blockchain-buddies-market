@@ -7,7 +7,7 @@ function attempTokenPurchase(key, address) {
   return async () => {
     try {
     // gas 1000000
-      await buy(key, {gas: '140000', from: address})
+      await buy(key, {gas: '140000', from: address, value: web3.toWei(0.005)})
     } catch(err) {
       console.warn(`Purchase of token: ${key} failed.`, err)
     }

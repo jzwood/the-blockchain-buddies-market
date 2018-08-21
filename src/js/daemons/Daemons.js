@@ -7,10 +7,10 @@ import { initTokenContract, initEventEmitter } from '../blockchain/contract'
 export default class Daemons extends React.Component {
   constructor() {
     super()
+    initTokenContract()
   }
 
   componentDidMount() {
-    initTokenContract()
     initEventEmitter() //async
   }
 

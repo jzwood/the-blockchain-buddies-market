@@ -40,7 +40,7 @@ export async function getTokens() {
 export async function initEventEmitter() {
   try {
     const instance = await NFCB.deployed()
-    console.log('NFCB successfully deployed:',instance)
+    console.log(NFCB, instance)
     const createEvent = (error ='', result='') => new CustomEvent(BLOCKCHAIN_EVENT, { detail: { error, result }})
     document.dispatchEvent(createEvent())
 
@@ -67,8 +67,12 @@ async function ownerOf(key) {
 
 export async function buy(key, msg) {
   try {
+    console.log(`Attempting to buy token: ${key + 1}.`, msg)
     const instance = await NFCB.deployed()
-    return await instance.buy(key, msg)
+    console.log('instance', instance)
+    return instance.buy(key, msg).then(receipt => {
+      console.log('receipt', receipt)
+    })
   } catch(err) {
     console.warn('Buy Error', err)
   }

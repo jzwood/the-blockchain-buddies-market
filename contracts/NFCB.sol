@@ -19,7 +19,8 @@ contract NFCB {
     CEO = msg.sender;
   }
 
-  event NewCryptoBuddy( bytes16 name, uint256 price);
+  event NewCryptoBuddy(bytes16 name, uint256 price);
+  event CryptoBuddyBought(uint8 key, address owner);
 
   function mint(bytes16 _name, uint256 _price) public {
     address minter = msg.sender;
@@ -37,8 +38,10 @@ contract NFCB {
     Token memory token = tokenMap[_key];
     require(token.available && token.price <= payment);
     address owner = keyToOwner[_key];
+    require(msg.sender != owner);
     owner.transfer(token.price);
     keyToOwner[_key] = msg.sender;
+    emit CryptoBuddyBought(key, msg.sender);
   }
 
   function ownerOf(uint8 _key) public view returns(address _owner) {

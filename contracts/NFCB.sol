@@ -19,8 +19,8 @@ contract NFCB {
     CEO = msg.sender;
   }
 
-  event NewCryptoBuddy(bytes16 name, uint256 price);
-  event CryptoBuddyBought(uint8 key, address owner);
+  event NewBuddy(bytes16 name, uint256 price);
+  event BuddyModified(uint8 key, address owner, uint256  price);
 
   function mint(bytes16 _name, uint256 _price) public {
     address minter = msg.sender;
@@ -29,7 +29,7 @@ contract NFCB {
     uint8 key = numKeys++;
     tokenMap[key] = newToken;
     keyToOwner.push(CEO);
-    emit NewCryptoBuddy(_name, _price);
+    emit NewBuddy(_name, _price);
   }
 
   function buy(uint8 _key) payable external {
@@ -41,7 +41,7 @@ contract NFCB {
     require(msg.sender != owner);
     owner.transfer(token.price);
     keyToOwner[_key] = msg.sender;
-    emit CryptoBuddyBought(key, msg.sender);
+    emit BuddyModified(_key, msg.sender, token.price);
   }
 
   function ownerOf(uint8 _key) public view returns(address _owner) {
@@ -49,9 +49,11 @@ contract NFCB {
   }
 
   function modify(uint8 _key, bool _forSale, uint8 _price) external {
-    require(ownerOf(_key) == msg.sender);
+    address owner = ownerOf(_key);
+    require(owner == msg.sender);
     Token storage ownedToken = tokenMap[_key];
     ownedToken.price = _price;
     ownedToken.available = _forSale;
+    emit BuddyModified(_key, owner, ownedToken.price);
   }
 }

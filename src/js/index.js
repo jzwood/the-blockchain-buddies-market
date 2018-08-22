@@ -14,8 +14,8 @@ const devGreeting = `
 function main() {
   console.info(devGreeting)
 
-  const hasMetamask = typeof web3 != 'undefined'
-  const fallback = <div className='fallback'><a href='https://github.com/jzwood/the-blockchain-buddies-market'>Blockchain Buddies</a> cryptocollectible marketplace requires Metamask to run! <a href="https://metamask.io" target="_blank">https://metamask.io</a></div>
+  const hasMetamask = typeof web3 !== 'undefined'
+  const fallback = <div className='fallback'><a href='https://github.com/jzwood/the-blockchain-buddies-market'>Blockchain Buddies</a> cryptocollectible marketplace requires Metamask to run! <a href="https://metamask.io">https://metamask.io</a></div>
 
   const store = createStore(
     rootReducer,
@@ -31,7 +31,7 @@ function main() {
   )
 }
 
-if (document.readyState == 'loading') {
+if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', main)
 } else {
   main()

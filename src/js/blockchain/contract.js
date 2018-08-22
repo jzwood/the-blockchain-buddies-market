@@ -10,6 +10,7 @@ export function initTokenContract() {
   const provider = web3provider()
   NFCB = contract(nfcb_artifacts)
   NFCB.setProvider(provider)
+  window.NFCB = NFCB
 }
 
 export async function getTokens() {
@@ -40,16 +41,21 @@ export async function getTokens() {
 export async function initEventEmitter() {
   try {
     const instance = await NFCB.deployed()
-    console.log(NFCB, instance)
     const createEvent = (error ='', result='') => new CustomEvent(BLOCKCHAIN_EVENT, { detail: { error, result }})
     document.dispatchEvent(createEvent())
 
-    const cryptoBuddyEvents = instance.NewCryptoBuddy()
-    cryptoBuddyEvents.watch((error, result) => {
+    const emitEvent = (error, result) => {
       console.info(result)
       const tokenEvent = createEvent(result)
       document.dispatchEvent(tokenEvent)
-    })
+    }
+
+    const newBuddy = instance.NewBuddy()
+    const buddyModified = instance.BuddyModified()
+
+    newBuddy.watch(emitEvent)
+    buddyModified.watch(emitEvent)
+
   } catch(err) {
     console.log('InitEventEmitter Error', err)
   }
@@ -60,6 +66,7 @@ async function ownerOf(key) {
     const instance = await NFCB.deployed()
     const owner = await instance.ownerOf(key)
     console.info(owner)
+    return owner
   } catch (err) {
     console.warn('OwnerOf Error',err)
   }
@@ -67,7 +74,7 @@ async function ownerOf(key) {
 
 export async function buy(key, msg) {
   try {
-    console.log(`Attempting to buy token: ${key + 1}.`, msg)
+    console.log(`Attempting to buy token: ${key}.`, msg)
     const instance = await NFCB.deployed()
     console.log('instance', instance)
     return instance.buy(key, msg).then(receipt => {

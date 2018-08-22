@@ -9,7 +9,7 @@ class TokenListener extends Component {
   constructor() {
     super()
 
-    this.onNewToken = async e => {
+    this.onBlockchainModified = async e => {
       try {
         const tokens = await getTokens()
         this.props.updateTokenList(tokens)
@@ -20,11 +20,11 @@ class TokenListener extends Component {
   }
 
   componentDidMount() {
-    document.addEventListener(BLOCKCHAIN_EVENT, this.onNewToken)
+    document.addEventListener(BLOCKCHAIN_EVENT, this.onBlockchainModified)
   }
 
   componentWillUnmount() {
-    document.removeEventListener(BLOCKCHAIN_EVENT, this.onNewToken)
+    document.removeEventListener(BLOCKCHAIN_EVENT, this.onBlockchainModified)
   }
 
   render() {

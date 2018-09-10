@@ -48,7 +48,7 @@ contract NFCB {
     _owner = keyToOwner[_key];
   }
 
-  function modify(uint8 _key, bool _forSale, uint8 _price) external {
+  function modify(uint8 _key, bool _forSale, uint256 _price) external {
     address owner = ownerOf(_key);
     require(owner == msg.sender);
     Token storage ownedToken = tokenMap[_key];

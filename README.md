@@ -12,6 +12,7 @@ is a demo repo for a [crypto-collectible](https://www.cryptokitties.co) marketpl
 - these globally installed packages
   - [truffle](https://truffleframework.com) (`$ npm install -g truffle@4.1.11`)
   - [yarn](https://yarnpkg.com/en/) (`$ brew yarn`)
+  - [parcel](https://parceljs.org/) (`npm install -g parcel-bundler@1.9.3`)
   - [npx](https://www.npmjs.com/package/npx) (`$ npm i -g npx`)
 
 ## getting started
@@ -149,9 +150,3 @@ One should be able to purchase Buddies by clicking on the buy buttons beneath th
 **LICENCE**
 
 This project is licensed under the terms of the [MIT](https://opensource.org/licenses/MIT) license. Copyright © 2018 Jake Wood
-
-
-
-
-
-
